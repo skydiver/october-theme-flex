@@ -1,5 +1,5 @@
 # Flex
-Flex is HTML5 fast and fluid responsive layout created by [Templatemo](http://www.templatemo.com/).
+[Flex](http://www.templatemo.com/live/templatemo_406_flex) is HTML5 fast and fluid responsive layout created by [Templatemo](http://www.templatemo.com/).
 
 This is a port for [OctoberCMS](https://octobercms.com/).
 
