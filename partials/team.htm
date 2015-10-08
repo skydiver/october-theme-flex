@@ -1,3 +1,24 @@
+==
+<?php
+function onStart() {
+
+    $this['team'] = [
+        ['image' => 'member1.jpg', 'name' => 'Tracy', 'position' => 'Designer'       , 'facebook' => '#', 'twitter' => '#', 'linkedin' => '#'],
+        ['image' => 'member2.jpg', 'name' => 'Mary' , 'position' => 'Developer'      , 'facebook' => '#', 'twitter' => '#', 'linkedin' => '#'],
+        ['image' => 'member3.jpg', 'name' => 'Julia', 'position' => 'Director'       , 'facebook' => '#', 'twitter' => '#', 'linkedin' => '#'],
+        ['image' => 'member4.jpg', 'name' => 'Linda', 'position' => 'Chief Executive', 'facebook' => '#', 'twitter' => '#', 'linkedin' => '#']
+    ];
+
+    $this['skills'] = [
+        'Photoshop' => 90,
+        'HTML'      => 75,
+        'WordPress' => 68,
+        'Marketing' => 95
+    ];
+
+}
+?>
+==
 <div class="content-section" id="our-team">
     <div class="container">
 
@@ -9,67 +30,22 @@
         </div>
 
         <div class="row">
-
+        {% for member in team %}
             <div class="team-member col-md-3 col-sm-6">
                 <div class="member-thumb">
-                    <img src="images/member1.jpg" alt="">
+                    <img src="{{ ('assets/images/' ~ member['image']) |theme }}" alt="{{ member['name'] }}">
                     <div class="team-overlay">
-                        <h3>Tracy</h3>
-                        <span>Designer</span>
+                        <h3>{{ member['name'] }}</h3>
+                        <span>{{ member['position'] }}</span>
                         <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
+                            {% if member['facebook'] is defined %}<li><a href="{{ member['facebook'] }}" class="fa fa-facebook"></a></li>{% endif %}
+                            {% if member['twitter']  is defined %}<li><a href="{{ member['twitter'] }}"  class="fa fa-twitter" ></a></li>{% endif %}
+                            {% if member['linkedin'] is defined %}<li><a href="{{ member['linkedin'] }}" class="fa fa-linkedin"></a></li>{% endif %}
                         </ul>
                     </div>
                 </div>
             </div>
-
-            <div class="team-member col-md-3 col-sm-6">
-                <div class="member-thumb">
-                    <img src="images/member2.jpg" alt="">
-                    <div class="team-overlay">
-                        <h3>Mary</h3>
-                        <span>Developer</span>
-                        <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-member col-md-3 col-sm-6">
-                <div class="member-thumb">
-                    <img src="images/member3.jpg" alt="">
-                    <div class="team-overlay">
-                        <h3>Julia</h3>
-                        <span>Director</span>
-                        <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="team-member col-md-3 col-sm-6">
-                <div class="member-thumb">
-                    <img src="images/member4.jpg" alt="">
-                    <div class="team-overlay">
-                        <h3>Linda</h3>
-                        <span>Chief Executive</span>
-                        <ul class="social">
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                            <li><a href="#" class="fa fa-twitter"></a></li>
-                            <li><a href="#" class="fa fa-linkedin"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+        {% endfor %}
         </div>
 
         <div class="row">
@@ -96,26 +72,13 @@
 
             <div class="col-md-4 col-sm-6">
                 <ul class="progess-bars">
+                {% for skill,percent in skills %}
                     <li>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">Photoshop 90%</div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%;">{{ skill }} {{ percent }}%</div>
                         </div>
                     </li>
-                    <li>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">HTML 75%</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;">WordPress 68%</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">Marketing 95%</div>
-                        </div>
-                    </li>
+                {% endfor %}
                 </ul>
             </div>
 
